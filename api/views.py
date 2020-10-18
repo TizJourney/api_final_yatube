@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from posts.models import Post
-from posts.serializers import CommentSerializer, PostSerializer
+from .models import Post
+from .serializers import CommentSerializer, PostSerializer
 
 from .permissions import IsAuthorOrReadOnly
 
