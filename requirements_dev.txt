@@ -22,6 +22,8 @@ pycodestyle==2.6.0
 pyflakes==2.2.0
 PyJWT==1.7.1
 pylint==2.6.0
+pylint-django==2.3.0
+pylint-plugin-utils==0.6
 pyparsing==2.4.7
 pytest==6.1.1
 pytest-django==4.0.0
