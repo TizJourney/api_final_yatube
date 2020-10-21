@@ -39,7 +39,7 @@ class Follow(models.Model):
         verbose_name='Подписчик',
         help_text='Пользователь, который подписывается.',
     )
-    author = models.ForeignKey(
+    following = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='following',
@@ -48,7 +48,7 @@ class Follow(models.Model):
     )
 
     class Meta:
-        unique_together = ('user', 'author')
+        unique_together = ('user', 'following')
 
     def __str__(self):
         user = self.user
