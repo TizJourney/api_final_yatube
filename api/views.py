@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, filters
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -50,11 +50,9 @@ class GroupViewSet(generics.ListCreateAPIView):
 
 class FollowViewSet(generics.ListCreateAPIView):
     serializer_class = FollowSerializer
-    # permission_classes = [IsAuthenticated]
-
-
-    def get_queryset(self):
-        return Follow.objects.all()
+    queryset = Follow.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['=user__username','=following__username']    
 
     def perform_create(self, serializer):
         following_user = get_object_or_404(User, username=self.request.data['following'])
