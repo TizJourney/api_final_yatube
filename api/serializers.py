@@ -51,7 +51,7 @@ class FollowSerializer(serializers.ModelSerializer):
         validators = [
             UniqueTogetherValidator(
                 queryset=User.objects.all(),
-                fields=['user', 'following']
+                fields=('user', 'following')
             )
         ]
         model = Follow             
