@@ -11,7 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
         slug_field='username', read_only=True
     )
     group = serializers.SlugRelatedField(
-        slug_field='title', queryset=Group.objects.all()
+        slug_field='title', required=False, queryset=Group.objects.all()
     )
 
     class Meta:
