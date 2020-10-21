@@ -11,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class GroupAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'slug', 'description',)
+    list_display = ('pk', 'title',)
     search_fields = ('title', 'slug',)
 
 
