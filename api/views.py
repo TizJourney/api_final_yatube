@@ -54,7 +54,7 @@ class FollowViewSet(generics.ListCreateAPIView):
 
 
     def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user)
+        return Follow.objects.all()
 
     def perform_create(self, serializer):
         following_user = get_object_or_404(User, username=self.request.data['following'])
