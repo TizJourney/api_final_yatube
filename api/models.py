@@ -59,6 +59,6 @@ class Follow(models.Model):
 
     def __str__(self):
         user = self.user
-        author = self.author
-        return f'Подписка @{user} на @{author}'
+        following = self.following
+        return f'Подписка @{user} на @{following}'
 

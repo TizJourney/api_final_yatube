@@ -1,7 +1,9 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 
 from .models import Comment, Post, Group, Follow
 
+User = get_user_model()
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
@@ -40,7 +42,7 @@ class FollowSerializer(serializers.ModelSerializer):
     )
     following = serializers.SlugRelatedField(
         slug_field='username',
-        queryset=Follow.objects.all()
+        queryset=User.objects.all()
     )
 
     class Meta:

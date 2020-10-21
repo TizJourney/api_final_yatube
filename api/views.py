@@ -13,6 +13,8 @@ from .serializers import (
 
 from .permissions import IsAuthorOrReadOnly
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class PostsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthorOrReadOnly]
@@ -55,5 +57,7 @@ class FollowViewSet(generics.ListCreateAPIView):
         return Follow.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        following_user = get_object_or_404(User, user__username=self.request.data['following'])
+        follower_user = self.request.user
+        serializer.save(user=follower_user, following=following_user)
 
