@@ -43,19 +43,18 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class GroupViewSet(generics.ListCreateAPIView):
+class GroupViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get', 'post']
     serializer_class = GroupSerializer
     queryset = Group.objects.all()
 
 
-class FollowViewSet(generics.ListCreateAPIView):
+class FollowViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get', 'post']
     serializer_class = FollowSerializer
     queryset = Follow.objects.all()
     filter_backends = [filters.SearchFilter]
-    search_fields = ['=user__username','=following__username']    
+    search_fields = ['=user__username','=following__username']
 
     def perform_create(self, serializer):
-        following_user = get_object_or_404(User, username=self.request.data['following'])
-        follower_user = self.request.user
-        serializer.save(user=follower_user, following_id=following_user.id)
-
+        serializer.save(user=self.request.user)

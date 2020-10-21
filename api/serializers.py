@@ -40,6 +40,8 @@ class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         slug_field='username',
         read_only=True,
+        #нужно для нормальной работы unique_together валидатора
+        default=serializers.CurrentUserDefault() 
     )
     following = serializers.SlugRelatedField(
         slug_field='username',
@@ -48,12 +50,6 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = '__all__'
-        validators = [
-            UniqueTogetherValidator(
-                queryset=User.objects.all(),
-                fields=('user', 'following')
-            )
-        ]
-        model = Follow             
+        model = Follow
 
 
