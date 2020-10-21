@@ -7,6 +7,9 @@ class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
         slug_field='username', read_only=True
     )
+    group = serializers.SlugRelatedField(
+        slug_field='title', queryset=Group.objects.all()
+    )
 
     class Meta:
         fields = '__all__'
