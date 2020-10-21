@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, generics, filters
+from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -13,8 +13,6 @@ from .serializers import (
 
 from .permissions import IsAuthorOrReadOnly
 
-from django.contrib.auth import get_user_model
-User = get_user_model()
 
 class PostsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthorOrReadOnly]
@@ -54,7 +52,7 @@ class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = FollowSerializer
     queryset = Follow.objects.all()
     filter_backends = [filters.SearchFilter]
-    search_fields = ['=user__username','=following__username']
+    search_fields = ['=user__username', '=following__username']
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

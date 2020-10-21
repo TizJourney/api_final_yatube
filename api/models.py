@@ -3,11 +3,13 @@ from django.db import models
 
 User = get_user_model()
 
+
 class Group(models.Model):
     title = models.CharField(max_length=200)
 
     def __str__(self):
         return self.title
+
 
 class Post(models.Model):
     text = models.TextField()
@@ -53,7 +55,7 @@ class Follow(models.Model):
         verbose_name='Автор',
         help_text='Пользователь, на которого подписываются.',
     )
-    
+
     class Meta:
         unique_together = ('user', 'following')
 
@@ -61,4 +63,3 @@ class Follow(models.Model):
         user = self.user
         following = self.following
         return f'Подписка @{user} на @{following}'
-

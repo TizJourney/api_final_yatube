@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from rest_framework.validators import UniqueTogetherValidator        
 
 from .models import Comment, Post, Group, Follow
 
 User = get_user_model()
+
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
@@ -40,8 +40,8 @@ class FollowSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(
         slug_field='username',
         read_only=True,
-        #нужно для нормальной работы unique_together валидатора
-        default=serializers.CurrentUserDefault() 
+        # нужно для нормальной работы unique_together валидатора
+        default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
         slug_field='username',
@@ -51,5 +51,3 @@ class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Follow
-
-
