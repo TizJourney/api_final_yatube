@@ -15,7 +15,7 @@ from .permissions import IsAuthorOrReadOnly
 
 
 class PostsViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    permission_classes = [IsAuthorOrReadOnly]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = [DjangoFilterBackend]
@@ -44,12 +44,11 @@ class CommentViewSet(viewsets.ModelViewSet):
 class GroupViewSet(generics.ListCreateAPIView):
     serializer_class = GroupSerializer
     queryset = Group.objects.all()
-    permission_classes = [IsAuthenticated]
 
 
 class FollowViewSet(generics.ListCreateAPIView):
     serializer_class = FollowSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
     def get_queryset(self):
