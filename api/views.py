@@ -2,8 +2,13 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Post
-from .serializers import CommentSerializer, PostSerializer
+from .models import Post, Group, Follow
+from .serializers import (
+    CommentSerializer,
+    PostSerializer,
+    FollowSerializer,
+    GroupSerializer,
+)
 
 from .permissions import IsAuthorOrReadOnly
 
@@ -31,3 +36,11 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    serializer_class = GroupSerializer
+    queryset = Group.objects.all()
+    permission_classes = [IsAuthenticated]
+    http_method_names = ['get', 'post']
+

@@ -15,6 +15,7 @@ router.register(
     views.CommentViewSet, basename='CommentViewSet'
 )
 router.register(r'posts', views.PostsViewSet)
+router.register(r'group', views.GroupViewSet)
 
 
 urlpatterns = [
