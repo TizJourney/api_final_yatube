@@ -10,7 +10,7 @@ from .serializers import (
 
 
 class PostsViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthorOrReadOnly]
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = (DjangoFilterBackend,)
