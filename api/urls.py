@@ -11,9 +11,6 @@ router.register(
     views.CommentViewSet, basename='CommentViewSet'
 )
 router.register(r'posts', views.PostsViewSet)
-router.register(r'follow', views.FollowViewSet)
-router.register(r'group', views.GroupViewSet)
-
 
 urlpatterns = [
     path('v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -22,5 +19,7 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name='token_refresh'
     ),
+    path('v1/follow/', views.FollowView.as_view()),
+    path('v1/group/', views.GroupView.as_view()),
     path('v1/', include(router.urls)),
 ]

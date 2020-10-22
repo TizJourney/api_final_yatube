@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters, viewsets
+from rest_framework import filters, viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Follow, Group, Post
@@ -36,14 +36,12 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    http_method_names = ('get', 'post')
+class GroupView(generics.ListCreateAPIView):
     serializer_class = GroupSerializer
     queryset = Group.objects.all()
 
 
-class FollowViewSet(viewsets.ModelViewSet):
-    http_method_names = ('get', 'post')
+class FollowView(generics.ListCreateAPIView):
     serializer_class = FollowSerializer
     queryset = Follow.objects.all()
     filter_backends = (filters.SearchFilter,)
