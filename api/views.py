@@ -37,17 +37,17 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ModelViewSet):
-    http_method_names = ['get', 'post']
+    http_method_names = ('get', 'post')
     serializer_class = GroupSerializer
     queryset = Group.objects.all()
 
 
 class FollowViewSet(viewsets.ModelViewSet):
-    http_method_names = ['get', 'post']
+    http_method_names = ('get', 'post')
     serializer_class = FollowSerializer
     queryset = Follow.objects.all()
     filter_backends = [filters.SearchFilter]
-    search_fields = ['=user__username', '=following__username']
+    search_fields = ('=user__username', '=following__username')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
